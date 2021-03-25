@@ -1,0 +1,2 @@
+simplebot==1.0.1
+wikiquote==0.1.14
