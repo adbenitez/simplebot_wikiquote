@@ -3,8 +3,7 @@ from random import choice
 import simplebot
 import wikiquote as wq
 from deltachat import Message
-from simplebot import DeltaBot
-from simplebot.bot import Replies
+from simplebot.bot import DeltaBot, Replies
 
 __version__ = "1.0.0"
 
