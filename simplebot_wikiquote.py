@@ -3,9 +3,14 @@ from random import choice
 import simplebot
 import wikiquote as wq
 from deltachat import Message
+from pkg_resources import DistributionNotFound, get_distribution
 from simplebot.bot import DeltaBot, Replies
 
-__version__ = "1.0.0"
+try:
+    __version__ = get_distribution(__name__).version
+except DistributionNotFound:
+    # package is not installed
+    __version__ = "0.0.0.dev0-unknown"
 
 
 @simplebot.command
@@ -27,13 +32,12 @@ def quote(bot: DeltaBot, payload: str, message: Message, replies: Replies) -> No
                 author = authors[0]
             else:
                 author = choice(authors)
-            text = '"{}"\n\n― {}'.format(
-                choice(wq.quotes(author, max_quotes=200, lang=lang)), author
-            )
+            text = f'"{choice(wq.quotes(author, max_quotes=200, lang=lang))}"\n\n― {author}'
         else:
-            text = "No quote found for: {}".format(payload)
+            text = f"No quote found for: {payload}"
     else:
-        text = '"{}"\n\n― {}'.format(*wq.quote_of_the_day(lang=lang))
+        quote, author = wq.quote_of_the_day(lang=lang)
+        text = f'"{quote}"\n\n― {author}'
 
     replies.add(text=text)
 
