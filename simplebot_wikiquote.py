@@ -1,3 +1,5 @@
+"""Plugin's commands definition."""
+
 from random import choice
 
 import simplebot
@@ -36,8 +38,8 @@ def quote(bot: DeltaBot, payload: str, message: Message, replies: Replies) -> No
         else:
             text = f"No quote found for: {payload}"
     else:
-        quote, author = wq.quote_of_the_day(lang=lang)
-        text = f'"{quote}"\n\n― {author}'
+        _quote, author = wq.quote_of_the_day(lang=lang)
+        text = f'"{_quote}"\n\n― {author}'
 
     replies.add(text=text)
 
@@ -47,6 +49,8 @@ def _get_locale(bot, addr: str) -> str:
 
 
 class TestPlugin:
+    """Online tests"""
+
     def test_quote(self, mocker):
         msg = mocker.get_one_reply("/quote Richard Stallman")
         assert msg.text

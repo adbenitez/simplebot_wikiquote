@@ -23,7 +23,7 @@ if __name__ == "__main__":
     MODULE_NAME = "simplebot_wikiquote"
     DESC = "Get Wikiquote quotes in Delta Chat (SimpleBot plugin)"
 
-    with open("README.rst") as fh:
+    with open("README.rst", encoding="utf-8") as fh:
         long_description = fh.read()
 
     setup(
